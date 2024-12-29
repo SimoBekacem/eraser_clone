@@ -12,19 +12,17 @@ import {
 import { LogOut, Plus, Settings } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
-import { useConvex } from "convex/react";
-import { api } from "@/convex/_generated/api";
 import { cn } from "@/lib/utils";
+import { getUserTeams } from "@/data/access-user";
 
 export interface Team {
-  _id: string;
+  id: number;
   teamName: string;
-  createdBy: string;
+  userId: string;
 }
 
 const SidebarTopButton = ({ user, setActiveTeamInfo }: any) => {
   const router = useRouter();
-  const convex = useConvex();
   const menu = [
     {
       id: 1,
@@ -43,9 +41,7 @@ const SidebarTopButton = ({ user, setActiveTeamInfo }: any) => {
   let [teamList, setTeamList] = useState([] as Team[]);
 
   const getTeamList = async () => {
-    const result = await convex.query(api.teams.getTeams, {
-      email: user?.email!,
-    });
+    const result = await getUserTeams(user.email);
     setTeamList(result as Team[]);
     setActiveTeam(result[0]);
     return result;

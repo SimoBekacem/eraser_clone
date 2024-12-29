@@ -8,8 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "webhint": "npx hint http://localhost:8080",
-    "prisma:generate": "npx prisma migrate dev --name init",
-    "prisma:show": "npx prisma studio"
+    "prisma:generate": "npx prisma generate",
+    "prisma:show": "npx prisma studio",
+    "prisma:migrate": "npx prisma migrate dev"
   },
   "dependencies": {
     "@editorjs/checklist": "^1.6.0",

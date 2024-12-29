@@ -14,4 +14,12 @@ model User {
   id    String  @id @default(uuid())
   email String  @unique
   name  String?
+  teams Team[]
+}
+
+model Team {
+  id        Int    @id @default(autoincrement())
+  teamName  String
+  createdBy User   @relation(fields: [userId], references: [id])
+  userId    String
 }
